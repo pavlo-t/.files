@@ -1,0 +1,16 @@
+#!/bin/sh
+
+echo "Going to install Bumblebee (say yes if asked to replace drivers)"
+
+NVIDIA=nvidia # Enter a branch if needed, i.e. nvidia-340xx or nvidia-304xx
+
+pacman -S --needed bumblebee bbswitch mesa xf86-video-intel $NVIDIA opencl-${NVIDIA} lib32-virtualgl lib32-${NVIDIA}-utils lib32-opencl-${NVIDIA} lib32-mesa-libgl primus lib32-primus
+pacman -R lib32-${NVIDIA}-libgl
+
+echo -e "\nRemoving /etc/X11/xorg.conf"
+rm -f /etc/X11/xorg.conf
+
+echo -e "\nEnabling bumblebeed.service"
+systemctl enable bumblebeed.service
+
+echo -e "\n### Done ###\n\nAdd yourself to the group bumblebee:\ngpasswd -a USERNAME bumblebee\nChanges will take effect after reboot"

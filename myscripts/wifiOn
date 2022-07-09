@@ -1,0 +1,4 @@
+#!/bin/sh
+
+nmcli r wifi on
+printf "Wifi ON" > /dev/pts/0

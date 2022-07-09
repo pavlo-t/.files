@@ -1,0 +1,12 @@
+#!/bin/sh
+
+echo "Going to remove Bumblebee (say yes if asked to replace drivers)"
+
+NVIDIA=nvidia # Enter a branch if needed, i.e. nvidia-340xx or nvidia-304xx
+
+pacman -R bumblebee bbswitch primus lib32-primus
+
+# echo -e "\nEnabling bumblebeed.service"
+# systemctl disable bumblebeed.service
+
+echo -e "\n### Done ###\n\nChanges will take effect after reboot"

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+echo "Going to install open source video drivers (say yes if asked to replace drivers)"
+
+pacman -S --needed mesa-libgl lib32-mesa-libgl # Add `xf86-video-intel xf86-video-nouveau` if not installed
+pacman -R nvidia nvidia-340xx nvidia-304xx
+
+echo -e "\nRemoving /etc/X11/xorg.conf"
+rm -f /etc/X11/xorg.conf
+
+echo -e "\n### Done ###\t\t\tChanges will take effect after reboot"

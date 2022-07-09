@@ -1,0 +1,12 @@
+#!/bin/sh
+################################################################################
+# 1. Find out touchpad id and use as 1st parameter of list-props and set-prop
+# xinput list | grep -i touchpad
+# 2. Find out scrolling distance property id and use it as 2nd parameter of set-prop
+# xinput list-props 13 | grep -i distance
+################################################################################
+
+# xinput set-prop 13 279 78 78
+synclient HorizScrollDelta=78
+
+printf "Set low touchpad two finger scrolling speed:\n vertical: 2.5\n horizontal: 2.5" > /dev/pts/0

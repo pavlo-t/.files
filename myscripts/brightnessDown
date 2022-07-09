@@ -1,0 +1,13 @@
+#!/bin/sh
+
+STEP=0.1
+BRIGHTNESS_SCRIPT=${PWD}/brightness
+OLD_VALUE=`${BRIGHTNESS_SCRIPT}`
+if [ "$OLD_VALUE" == 0.0 ]; then
+	echo "cannot set brightness below 0"
+	exit 0
+fi
+
+NEW_VALUE=`awk "BEGIN {print ${OLD_VALUE}-${STEP}}"`
+
+`${BRIGHTNESS_SCRIPT} ${NEW_VALUE}`

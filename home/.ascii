@@ -1,0 +1,51 @@
+#!/bin/sh
+
+randomBase() {
+    shuf -i 0-3 -n 1
+}
+
+a="\033[00;31ma\033[00m"
+A="\033[01;31mA\033[00m"
+t="\033[00;32mt\033[00m"
+T="\033[01;32mT\033[00m"
+c="\033[00;33mc\033[00m"
+C="\033[01;33mC\033[00m"
+g="\033[00;34mg\033[00m"
+G="\033[01;34mG\033[00m"
+l="\033[00;01m|\033[00m"
+L="\033[00;01m|\033[00m"
+
+draw() {
+    case $1 in
+        0) printf "${a}" ;;
+        1) printf "${g}" ;;
+        2) printf "${c}" ;;
+        3) printf "${t}" ;;
+    esac
+}
+
+width=`tput cols`
+width=`expr $width / 2 - 1`
+
+for i in $(seq 0 $width)
+do
+    var=`randomBase`
+    dnaSeq1[$i]=`draw $var 1`
+    dnaSeq2[$i]=$var
+done
+
+echo " ${dnaSeq1[*]}"
+echo " ${dnaSeq2[*]}"
+
+echo -e "\
+ ${T}       ${c} ${G}       ${g} ${G}       ${c} ${T}       ${c} ${G}       ${g} ${G}       ${c} ${T}       ${c} ${G}       ${g}
+ ${L} ${C}   ${t} | ${L} ${G}   ${a} | ${L} ${T}   ${a} | ${L} ${C}   ${t} | ${L} ${G}   ${a} | ${L} ${T}   ${a} | ${L} ${C}   ${t} | ${L} ${G}   ${a} |
+ | | ${G} | | | | ${A} | | | | ${T} | | | | ${G} | | | | ${A} | | | | ${T} | | | | ${G} | | | | ${A} | |
+ | ${g}   ${A} ${L} | ${g}   ${T} ${L} | ${a}   ${T} ${L} | ${g}   ${A} ${L} | ${g}   ${T} ${L} | ${a}   ${T} ${L} | ${g}   ${A} ${L} | ${g}   ${T} ${L}
+ ${a}       ${G} ${c}       ${C} ${c}       ${G} ${a}       ${G} ${c}       ${C} ${c}       ${G} ${a}       ${G} ${c}       ${C}"
+#T       c G       g G       c T       c G       g G       c T       c G       g
+#| C   t | | G   a | | T   a | | C   t | | G   a | | T   a | | C   t | | G   a |
+#| | G | | | | A | | | | T | | | | G | | | | A | | | | T | | | | G | | | | A | |
+#| g   A | | g   T | | a   T | | g   A | | g   T | | a   T | | g   A | | g   T |
+#a       G c       C c       G a       G c       C c       G a       G c       C
+# length = 40

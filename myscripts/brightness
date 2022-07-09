@@ -1,0 +1,25 @@
+#!/bin/sh
+################################################################################
+# Set brightness
+################################################################################
+
+VALUE="$1"
+OUTPUT="eDP-1"
+
+# Show current brightness and exit if no argument is provided
+OLD_VALUE=`xrandr --verbose | grep -m 1 -i brightness | cut -f2 -d ' '`
+if [ -z $VALUE ]; then
+	echo $OLD_VALUE
+	exit 0
+fi
+
+xrandr --output $OUTPUT --brightness $VALUE
+#xrandr --output $OUTPUT --brightness $VALUE --gamma $VALUE:$VALUE:$VALUE
+
+# Show osd message
+
+ICON="/usr/share/icons/breeze-dark/actions/22/whitebalance.svg"
+#TEXT="${OLD_VALUE} -> ${VALUE}"
+TEXT="${VALUE}"
+
+qdbus org.kde.plasmashell /org/kde/osdService org.kde.osdService.showText ${ICON} "${TEXT}"

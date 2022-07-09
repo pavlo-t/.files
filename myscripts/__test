@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo "
+T       c G       g G       c T       c G       g G       c T       c G       g G       c T       c G       g G       c
+| C   t | | G   a | | T   a | | C   t | | G   a | | T   a | | C   t | | G   a | | T   a | | C   t | | G   a | | T   a |
+| | G | | | | A | | | | T | | | | G | | | | A | | | | T | | | | G | | | | A | | | | T | | | | G | | | | A | | | | T | |
+| g   A | | g   T | | a   T | | g   A | | g   T | | a   T | | g   A | | g   T | | a   T | | g   A | | g   T | | a   T |
+a       G c       C c       G a       G c       C c       G a       G c       C c       G a       G c       C c       G"

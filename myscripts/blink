@@ -1,0 +1,30 @@
+#!/bin/sh
+################################################################################
+# Changes brightness for a few seconds
+# Could be used for notifications in full screen
+################################################################################
+
+### Play a sound
+paplay /usr/share/sounds/Oxygen-Sys-App-Message.ogg &
+
+freq=0.08
+sec=0.5
+COUNT=`awk "BEGIN {print $sec/$freq/2}"`
+
+### Using xrandr
+
+OUTPUT="eDP-1"
+BRIGHTNESS_SCRIPT=${PWD}/brightness
+OLD_VALUE=`${BRIGHTNESS_SCRIPT}`
+if [ -z $OLD_VALUE ]; then
+	OLD_VALUE=1
+fi
+VALUE=0.08
+
+for i in `seq 1 $COUNT`;
+do
+    xrandr --output $OUTPUT --brightness $VALUE
+    sleep $freq
+    xrandr --output $OUTPUT --brightness $OLD_VALUE
+    sleep $freq
+done
