@@ -28,9 +28,7 @@ findmnt --target /tmp
 kquitapp5 plasmashell && kstart5 plasmashell
 #DBUS_SESSION_BUS_ADDRESS=none qbittorrent &>>/dev/null &
 DBUS_SESSION_BUS_ADDRESS=none qbittorrent &>>/tmp/downloads/.qBittorrent/std_out &
-#kwin_x11 --replace &
-#plasmashell --replace &
-#pkill -15 Xorg
+#pkill -15 appname
 #killall -9 appname
 #find ./ -type f \( -name "*.sh" -o -name "*.txt" -o -name "*.c" \)
 #grep -rni -e "a" -e "b" ./

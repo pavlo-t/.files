@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# use `who` to find the display the GUI is running on
+export DISPLAY=:0
+kwin_x11 --replace &
