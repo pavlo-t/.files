@@ -5,7 +5,7 @@
 ################################################################################
 
 ### Play a sound
-paplay /usr/share/sounds/Oxygen-Sys-App-Message.ogg &
+#paplay /usr/share/sounds/Oxygen-Sys-App-Message.ogg &
 
 freq=0.08
 sec=0.5
