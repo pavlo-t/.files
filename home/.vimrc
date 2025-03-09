@@ -3,6 +3,10 @@ source $VIMRUNTIME/defaults.vim
 set nobackup
 set swapfile dir=/tmp
 
+" open split windows on the right/below
+set splitbelow
+set splitright
+
 set hlsearch
 
 set number relativenumber
