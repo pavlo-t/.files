@@ -37,7 +37,7 @@ augroup vimRust
 augroup END
 
 augroup vimMarkdown
-	au filetype markdown set spell spelllang=en
+	au filetype markdown set spell spelllang=en tabstop=2 softtabstop=2
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
