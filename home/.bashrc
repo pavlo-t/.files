@@ -13,8 +13,9 @@ HISTCONTROL=ignoreboth
 shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=10000
+HISTFILESIZE=10000
+HISTTIMEFORMAT='%FT%T%z '
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -62,7 +63,6 @@ if [ "$color_prompt" = yes ]; then
 	else
 		userColor=$green
 	fi
-	II="${userColor}|"
 
 	exitCode()
 	{
@@ -76,10 +76,15 @@ if [ "$color_prompt" = yes ]; then
 		printf "\033[00;%s%03d\033[00m" $statusColor $st
 	}
 
-	info="\n${II}\$(exitCode)${II}${purple}jobs:\j${II}${teal}\D{%F %T %z}${II}${userColor}\u${white}@${yellow}\H${II}${blue}\w"
-	prompt="${II}${userColor}\!|\#${II}${userColor}\\$"
-
-		PS1="${info}${reset}\n${prompt} ${reset}"
+	PS1="\n"
+	PS1+="\$(exitCode)"
+	PS1+=" ${teal}\D{%FT%T%z}"
+	PS1+='`if [ -n "$(jobs -p)" ]; then echo " '$purple'jobs:\j"; fi`'
+	PS1+=" ${blue}\w"
+	PS1+="\$(git branch 2>/dev/null | grep '^*' | sed 's/^* / "$purple"/')"
+	PS1+=$reset"\n"
+	PS1+="${userColor}\u${white}@${yellow}\H${userColor}\\$"
+	PS1+=$reset' '
 else
 	PS1='\u@\h:\w\$ '
 fi
@@ -153,3 +158,7 @@ export HELM_STARTERS="${HOME}/.local/share/helm/starters"
 
 # k9s
 export EDITOR=vim
+
+# vi mode
+set -o vi
+alias evcxr='evcxr --edit-mode vi'
