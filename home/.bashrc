@@ -50,40 +50,59 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-	red="\[\033[01;31m\]"
-	green="\[\033[01;32m\]"
-	yellow="\[\033[01;33m\]"
-	blue="\[\033[01;34m\]"
-	purple="\[\033[00;35m\]"
-	teal="\[\033[00;36m\]"
-	reset="\[\033[00m\]"
-	white="\[\033[00;01m\]"
+	red="\[\033[1;31m\]"
+	green="\[\033[1;32m\]"
+	yellow="\[\033[1;33m\]"
+	blue="\[\033[1;34m\]"
+	purple="\[\033[0;35m\]"
+	teal="\[\033[0;36m\]"
+	white="\[\033[0;37m\]"
+	reset="\[\033[0m\]"
+
+	red_raw="\033[0;31m"
+	green_raw="\033[0;32m"
+	white_b_raw="\033[1;37m"
+	reset_raw="\033[0m"
+
 	if [ $EUID == 0 ]; then
-		userColor=$red
+		user_color=$red
 	else
-		userColor=$green
+		user_color=$green
 	fi
 
-	exitCode()
-	{
-		st=$?
-		if [[ $st == 0 ]]; then
-			statusColor="32m"
+	print_exit_code() {
+		local status=$?
+		local status_color
+		if [[ $status == 0 ]]; then
+			status_color=${green_raw}
 		else
-			statusColor="31m"
+			status_color=${red_raw}
 		fi
 
-		printf "\033[00;%s%03d\033[00m" $statusColor $st
+		echo -en "$status_color$(printf "%03d" $status)$reset_raw"
+	}
+
+	print_git_branch() {
+		local branch=$(git branch --show-current 2>/dev/null)
+		if [[ -n $branch ]]; then
+			echo -en " $white_b_raw$branch"
+			if ! git diff --quiet 2>/dev/null || [[ -n $(git ls-files --others --exclude-standard 2>/dev/null) ]]; then
+				echo -en "$red_raw*"
+			elif ! git diff --cached --quiet 2>/dev/null; then
+				echo -en "$green_raw*"
+			fi
+			echo -en $reset_raw
+		fi
 	}
 
 	PS1="\n"
-	PS1+="\$(exitCode)"
+	PS1+='$(print_exit_code)'
 	PS1+=" ${teal}\D{%FT%T%z}"
 	PS1+='`if [ -n "$(jobs -p)" ]; then echo " '$purple'jobs:\j"; fi`'
-	PS1+=" ${blue}\w"
-	PS1+="\$(git branch 2>/dev/null | grep '^*' | sed 's/^* / "$purple"/')"
+	PS1+=" ${blue}\w${reset}"
+	PS1+='$(print_git_branch)'
 	PS1+=$reset"\n"
-	PS1+="${userColor}\u${white}@${yellow}\H${userColor}\\$"
+	PS1+="${user_color}\u${white}@${yellow}\H${user_color}\\$"
 	PS1+=$reset' '
 else
 	PS1='\u@\h:\w\$ '
