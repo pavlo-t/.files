@@ -14,7 +14,6 @@ home=(
 	#".ascii"
 	".config/procps"
 
-	".gitconfig"
 	".xinitrc"
 	"notes.sh"
 )

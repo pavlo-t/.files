@@ -23,7 +23,7 @@ set colorcolumn=122
 highlight ColorColumn ctermbg=52
 
 " show tabs and trailing spaces
-set list listchars=tab:⟶\ ,trail:·,extends:>,precedes:<,nbsp:%
+set list listchars=tab:⟶\ ,trail:·,extends:…,precedes:…,nbsp:%
 
 set tabstop=2
 set softtabstop=2

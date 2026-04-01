@@ -155,6 +155,10 @@ export SDKMAN_DIR="${HOME}/.sdkman"
 # Rust
 PATH=$PATH:${HOME}/.cargo/bin
 
+# flutter and dart
+PATH=$PATH:${HOME}/fvm/versions/stable/bin
+#source <(flutter bash-completion)
+
 # Node Version Manager
 [[ -s "/usr/share/nvm/init-nvm.sh" ]] && source /usr/share/nvm/init-nvm.sh
 

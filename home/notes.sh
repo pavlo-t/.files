@@ -26,7 +26,7 @@ findmnt --target /tmp
 #useradd -m -d /tmp/downloads/testu -G audio,http,wheel testu
 #passwd testu
 #userdel -rf testu
-kquitapp5 plasmashell && kstart5 plasmashell
+kquitapp6 plasmashell && kstart plasmashell
 #pkill -15 appname
 #killall -9 appname
 #find ./ -type f \( -name "*.sh" -o -name "*.txt" -o -name "*.c" \)
