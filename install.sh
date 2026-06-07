@@ -14,7 +14,6 @@ home=(
 	#".ascii"
 	".config/procps"
 
-	".xinitrc"
 	"notes.sh"
 )
 

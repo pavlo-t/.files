@@ -148,10 +148,6 @@ if ! shopt -oq posix; then
 	fi
 fi
 
-# SDKMAN
-export SDKMAN_DIR="${HOME}/.sdkman"
-[[ -s "${HOME}/.sdkman/bin/sdkman-init.sh" ]] && source "${HOME}/.sdkman/bin/sdkman-init.sh"
-
 # Rust
 PATH=$PATH:${HOME}/.cargo/bin
 
