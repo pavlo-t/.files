@@ -155,18 +155,15 @@ PATH=$PATH:${HOME}/.cargo/bin
 PATH=$PATH:${HOME}/fvm/versions/stable/bin
 #source <(flutter bash-completion)
 
+# Claude
+export PATH="$HOME/.local/bin:$PATH"
+
 # Node Version Manager
 [[ -s "/usr/share/nvm/init-nvm.sh" ]] && source /usr/share/nvm/init-nvm.sh
-
-# k9s
-export EDITOR=vim
 
 # vi mode
 set -o vi
 alias evcxr='evcxr --edit-mode vi'
-
-# NAS
-export HELM_STARTERS="${HOME}/.local/share/helm/starters"
 
 # Print uptime at the start of the session
 uptime
